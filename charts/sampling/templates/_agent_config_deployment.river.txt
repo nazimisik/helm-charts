@@ -1,0 +1,12 @@
+{{- define "agent.config.deployment" -}}
+  {{- include "deployment.receiver.otlp" . }}
+  {{- include "deployment.processor.transform.add_resource_attributes" . }}
+  {{- include "deployment.processor.batch" . }}
+  {{- include "deployment.exporter.loki" . }}
+  {{- include "deployment.exporter.prometheus" . }}
+  {{- include "deployment.prometheus.remote_write" . }}
+  {{- include "deployment.loki.write" . }}
+  {{- include "deployment.processor.k8sattributes" . }}
+  {{- include "deployment.processor.transform.add_k8s_attributes" . }}
+  {{- include "deployment.exporter.loadbalancing" . }}
+{{- end -}}

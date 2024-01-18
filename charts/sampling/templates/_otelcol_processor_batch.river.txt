@@ -1,0 +1,21 @@
+{{- define "deployment.processor.batch" -}}
+otelcol.processor.batch "default" {
+  // https://grafana.com/docs/agent/latest/flow/reference/components/otelcol.processor.batch/
+  output {
+    metrics = [otelcol.exporter.prometheus.grafana_cloud_prometheus.input]
+    logs    = [otelcol.exporter.loki.grafana_cloud_loki.input]
+  }
+}
+
+{{ end }}
+
+{{- define "statefulset.processor.batch" -}}
+otelcol.processor.batch "default" {
+  // https://grafana.com/docs/agent/latest/flow/reference/components/otelcol.processor.batch/
+  output {
+    metrics = [otelcol.exporter.prometheus.grafana_cloud_prometheus.input]
+    traces  = [otelcol.exporter.otlp.grafana_cloud_tempo.input]
+  }
+}
+
+{{ end }}

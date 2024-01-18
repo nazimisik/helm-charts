@@ -1,0 +1,15 @@
+{{- define "deployment.loki.write" -}}
+loki.write "grafana_cloud_loki" {
+  // https://grafana.com/docs/agent/latest/flow/reference/components/loki.write/
+  endpoint {
+    url = env("GRAFANA_CLOUD_LOKI_URL")
+
+    basic_auth {
+      username = env("GRAFANA_CLOUD_LOKI_USERNAME")
+      password = env("GRAFANA_CLOUD_API_KEY")
+    }
+  }
+}
+
+{{ end }}
+
